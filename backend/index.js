@@ -68,15 +68,44 @@ app.get('/api/tariffs', async (req, res) => {
     }
 });
 
+// app.get('/api/car', async (req, res) => {
+//     try {
+//         const result = await pool.query('SELECT * FROM car ORDER BY id');
+//         res.json(result.rows);
+//     } catch (e) {
+//         console.error(e);
+//         res.status(500).json({ error: 'database error' });
+//     }
+// });
+
 app.get('/api/car', async (req, res) => {
+    const { queryName, proizvoditel } = req.query;
+
     try {
-        const result = await pool.query('SELECT * FROM car ORDER BY id');
-        res.json(result.rows);
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({ error: 'database error' });
+        if (queryName === 'proizvoditel_filter') {
+            const selected = proizvoditel ? proizvoditel.split(',') : [];
+
+            if (selected.length === 0) {
+                const allItems = await pool.query('SELECT * FROM car ORDER BY id');
+                return res.json(allItems.rows);
+            }
+
+            const filteredItems = await pool.query(
+                'SELECT * FROM car WHERE proizvoditel = ANY($1::text[]) ORDER BY id',
+                [selected]
+            );
+
+            return res.json(filteredItems.rows);
+        }
+
+        const allItems = await pool.query('SELECT * FROM car ORDER BY id');
+        res.json(allItems.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
     }
 });
+
 app.delete('/api/car/:id', authMiddleware, requireAdminOrSeller, async (req, res) => {
     try {
         const { id } = req.params;
