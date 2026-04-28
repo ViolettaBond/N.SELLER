@@ -8,13 +8,13 @@
 
 .vehiclesMain{
     width: 100%;
-    min-height: 100vh;
+    min-height: 130vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
     .vehiclesBlock{
-        width: 75%;
+        width: 80%;
         min-height: 80vh;
         display: flex;
         margin: 0 auto;
@@ -25,7 +25,7 @@
             flex-direction: column;
 
             .track{
-            width: 30%;
+            width: 80%;
             display: flex;
             justify-content: space-between;
 
@@ -45,7 +45,7 @@
         }
 
         .list{
-            width: 40%;
+            width: 80%;
 
             p{
                 color: #252525;
@@ -54,7 +54,7 @@
             }
 
             .priceList{
-                width: 100%;
+                width: 60%;
                 height: 4vh;
                 display: flex;
                 align-items: center;
@@ -100,14 +100,113 @@
 
                             p{
                                 width: 80%;
-                                text-align: left;
+                                font-size: 14px;
+                                font-weight: 400;
+                                color: #8B959E;
                             }
                             
                         }
                     }
                 }
+            }
         }
-        }
-        
     }
+    .columnCarBlock{
+        display: flex;
+        flex-direction: column;
+        .categoryCar{
+            width: 100%;
+            display: flex;  
+            .categoryCard{
+                width: 100%;
+                display: flex;
+                .categoryType{
+                    width: 60%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+            
+        }
+    }
+    .carBlock {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+
+            .card {
+                background: #fff;
+                border-radius: 12px;
+                min-height: 464px;
+                display: flex;
+                justify-content: center;
+                cursor: pointer;
+
+                .cardInner {
+                    width: 75%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    .specsList {
+                        width: 85%;
+                        display: flex;
+                        justify-content: space-between;
+                        li {
+                            width: 30%;
+                            height: 24px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: rgba($color: #8b959e, $alpha: 0.05);
+                            font-size: 12px;
+                            border-radius: 4px;
+                        }
+                    }
+
+                    .footer {
+                        border-top: 2px solid #e8e9e8;
+                        height: 90px;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+
+                        .sellerInfo {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            position: absolute;
+                            opacity: 1;
+                            transition: opacity 0.3s ease;
+                            z-index: 1;
+
+                            .locationIcon {
+                                display: flex;
+                                gap: 10px;
+                            }
+
+                            .priceBlock {
+                                width: 120px;
+                                height: 40px;
+
+                                .price {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-end;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: white;
+
+                                    p {
+                                        font-size: 22px;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 }
